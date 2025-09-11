@@ -207,3 +207,9 @@ marimo/_lsp/
 __marimo__/
 awscliv2.zip
 *.zip
+
+# Project specific
+artifacts/
+logs/
+aws/
+test/
