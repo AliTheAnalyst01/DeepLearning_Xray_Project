@@ -31,7 +31,7 @@ SHUFFLE = True
 PIN_MEMORY = True
 
 # Model Training constants
-EPOCH = 10
+EPOCH = 25
 STEP_SIZE = 5
 GAMMA = 0.5
 DEVICE = "cuda"  # or "cpu" if no GPU
@@ -77,7 +77,7 @@ SHUFFLE = True
 PIN_MEMORY = True
 
 # Model Training constants
-EPOCH = 10
+EPOCH = 25
 STEP_SIZE = 5
 GAMMA = 0.5
 DEVICE = "cuda"  # or "cpu" if no GPU

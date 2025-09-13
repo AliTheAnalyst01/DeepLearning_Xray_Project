@@ -1,0 +1,80 @@
+[
+    // === CURSOR & NAVIGATION SHORTCUTS ===
+    {
+        "key": "ctrl+up",
+        "command": "editor.action.insertCursorAbove",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+down",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+up",
+        "command": "editor.action.copyLinesUpAction",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+down",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+up",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+down",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+k",
+        "command": "editor.action.deleteLines",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "editor.action.insertLineAfter",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+enter",
+        "command": "editor.action.insertLineBefore",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+/",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+a",
+        "command": "editor.action.blockComment",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "editor.action.selectHighlights",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "cursorUndo",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+u",
+        "command": "cursorRedo",
+        "when": "editorTextFocus"
+    }
+]
+
+

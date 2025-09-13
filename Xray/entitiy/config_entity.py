@@ -56,19 +56,20 @@ class ModelTrainerConfig:
         )
         self.train_transforms_key: str = TRAIN_TRANSFORMS_KEY
         self.epochs: int = EPOCH
-        self.optimizer_params: dict = {"lr": 0.01, "momentum": 0.8}
+        self.optimizer_params: dict = {"lr": 0.001, "momentum": 0.9}
         self.scheduler_params: dict = {"step_size": STEP_SIZE, "gamma": GAMMA}
         self.device: str = DEVICE
-        
+
 @dataclass
 class ModelEvaluationConfig:
     def __init__(self):
-        self.device: str = DEVICE
-        self.test_loss: float = 0.0
-        self.test_accuracy: float = 0.0
-        self.total: int = 0
-        self.total_batch: int = 0
-        self.optimizer_params: dict = {"lr": 0.01, "momentum": 0.8}
+        self.artifact_dir = ARTIFACT_DIR
+        self.device = DEVICE
+        self.test_loss = 0.0
+        self.test_accuracy = 0.0
+        self.total = 0
+        self.total_batch = 0
+        self.optimizer_params = {"lr": 0.01, "momentum": 0.8}
 
 @dataclass
 class ModelPusherConfig:
@@ -158,12 +159,12 @@ class ModelTrainerConfig:
         self.train_transforms_key: str = TRAIN_TRANSFORMS_KEY
         self.epochs: int = EPOCH
 
-        self.optimizer_params: dict = {"lr": 0.01, "momentum": 0.8}
+        self.optimizer_params: dict = {"lr": 0.001, "momentum": 0.9}
 
         self.scheduler_params: dict = {"step_size": STEP_SIZE, "gamma": GAMMA}
 
         self.device: device = DEVICE
-        
+
 @dataclass
 class ModelEvaluationConfig:
     def __init__(self):
@@ -177,7 +178,7 @@ class ModelEvaluationConfig:
 
         self.total_batch: int = 0
 
-        self.optimizer_params: dict = {"lr": 0.01, "momentum": 0.8}
+        self.optimizer_params: dict = {"lr": 0.001, "momentum": 0.9}
 
 # Model Pusher Configurations
 @dataclass

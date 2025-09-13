@@ -1,5 +1,191 @@
 {
+    // === CURSOR & EDITOR SETTINGS ===
     "editor.cursorWidth": 1,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorStyle": "line",
+    "editor.cursorSurroundingLines": 0,
+    "editor.cursorSurroundingLinesStyle": "none",
+    "editor.cursorMoveOnType": false,
+    "editor.renderLineHighlight": "none",
+    "editor.renderWhitespace": "none",
     "terminal.integrated.cursorStyle": "line",
-    "editor.overtypeCursorStyle": "line-thin"
+    "terminal.integrated.cursorWidth": 1,
+    "editor.overtypeCursorStyle": "line-thin",
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+    "editor.autoIndent": "full",
+
+    // === PYTHON DEVELOPMENT ===
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["--line-length", "88"],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.diagnosticMode": "workspace",
+
+    // === CODE FORMATTING ===
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.fixAll": "explicit"
+    },
+
+    // === INDENTATION & TABS ===
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+    "editor.trimAutoWhitespace": true,
+    "editor.autoIndent": "full",
+    "editor.wordBasedSuggestions": "matchingDocuments",
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 88,
+    "editor.rulers": [88, 120],
+    "editor.guides.indentation": true,
+    "editor.guides.bracketPairs": true,
+
+    // === VISUAL ENHANCEMENTS ===
+    "editor.fontSize": 14,
+    "editor.fontFamily": "'Fira Code', 'JetBrains Mono', 'Cascadia Code', monospace",
+    "editor.fontLigatures": true,
+    "editor.lineHeight": 1.6,
+    "editor.minimap.enabled": true,
+    "editor.minimap.showSlider": "always",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.renderControlCharacters": true,
+    "editor.showFoldingControls": "always",
+    "editor.foldingStrategy": "indentation",
+
+    // === AUTOCOMPLETE & INTELLISENSE ===
+    "editor.suggestSelection": "first",
+    "editor.acceptSuggestionOnCommitCharacter": true,
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    "editor.parameterHints.enabled": true,
+    "editor.hover.enabled": true,
+    "editor.hover.delay": 300,
+
+    // === TERMINAL ===
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontFamily": "'Fira Code', 'JetBrains Mono', monospace",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.shell.linux": "/bin/bash",
+
+    // === FILE EXPLORER ===
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.compactFolders": false,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.py": "${capture}.pyi, ${capture}.pyc, ${capture}__pycache__",
+        "requirements*.txt": "requirements*.in, requirements*.lock",
+        "*.yaml": "*.yml",
+        "*.json": "*.jsonc, *.json5"
+    },
+
+    // === GIT ===
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.autoStash": true,
+    "git.showProgress": true,
+
+    // === SEARCH ===
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/__pycache__": true,
+        "**/.git": true,
+        "**/artifacts": true,
+        "**/logs": true,
+        "**/aws": true
+    },
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.pytest_cache": true,
+        "**/artifacts": true,
+        "**/logs": true
+    },
+
+    // === WORKSPACE ===
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.highlightModifiedTabs": true,
+
+    // === PYTHON SPECIFIC ===
+    "python.analysis.extraPaths": ["./Xray"],
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportGeneralTypeIssues": "warning",
+        "reportOptionalMemberAccess": "warning",
+        "reportOptionalSubscript": "warning"
+    },
+
+    // === DEBUGGING ===
+    "debug.console.fontSize": 13,
+    "debug.console.fontFamily": "'Fira Code', monospace",
+    "debug.inlineValues": true,
+    "debug.showBreakpointsInOverviewRuler": true,
+
+    // === EXTENSIONS ===
+    "extensions.autoUpdate": true,
+    "extensions.autoCheckUpdates": true,
+
+    // === PERFORMANCE ===
+    "files.watcherExclude": {
+        "**/__pycache__/**": true,
+        "**/artifacts/**": true,
+        "**/logs/**": true,
+        "**/aws/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true
+    },
+    "search.followSymlinks": false,
+    "files.hotExit": "onExitAndWindowClose",
+
+    // === LINE ENDINGS & ENCODING ===
+    "files.eol": "\n",
+    "files.encoding": "utf8",
+    "files.autoGuessEncoding": true,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+
+    // === KEYBOARD & NAVIGATION ===
+    "editor.scrollBeyondLastLine": false,
+    "editor.smoothScrolling": true,
+    "editor.cursorSurroundingLines": 3,
+    "editor.cursorSurroundingLinesStyle": "default",
+    "editor.mouseWheelScrollSensitivity": 1,
+    "editor.fastScrollSensitivity": 5,
+    "editor.cursorMoveOnType": true,
+    "editor.cursorMoveOnTypeDelay": 0,
+
+    // === ADDITIONAL CURSOR SETTINGS ===
+    "editor.cursorSurroundingLines": 5,
+    "editor.cursorSurroundingLinesStyle": "all",
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorAnimationDuration": 0,
+    "editor.cursorWidth": 3,
+    "editor.cursorStyle": "line"
 }

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from torch.utils.data import DataLoader
 
 @dataclass
 class DataIngestionArtifact:
@@ -7,19 +8,24 @@ class DataIngestionArtifact:
 
 @dataclass
 class DataTransformationArtifact:
-    transformed_train_object: str
-    transformed_test_object: str
+    transformed_train_object: DataLoader
+    transformed_test_object: DataLoader
     train_transforms_file: str
     test_transforms_file: str
 
 @dataclass
 class ModelTrainerArtifact:
     trained_model_file_path: str
+    train_accuracy: float
+    test_accuracy: float
+    train_loss: float
+    test_loss: float
 
 @dataclass
 class ModelEvaluationArtifact:
-    is_model_accepted: bool
-    improved_accuracy: float
+    model_evaluation_path: str
+    test_accuracy: float
+    test_loss: float
 
 @dataclass
 class ModelPusherArtifact:
