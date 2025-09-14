@@ -100,6 +100,14 @@ class TrainPipeline:
             )
             logging.info("Model evaluation completed successfully")
 
+            # Step 5: Push model for deployment
+            logging.info("Starting model pusher...")
+            model_pusher_artifact: ModelPusherArtifact = self.start_model_pusher(
+                model_trainer_artifact=model_trainer_artifact,
+                data_transformation_artifact=data_transformation_artifact
+            )
+            logging.info("Model pusher completed successfully")
+
             logging.info("Pipeline completed successfully")
         except Exception as e:
             logging.error(f"Pipeline failed with error: {str(e)}")
@@ -152,4 +160,34 @@ class TrainPipeline:
 
         except Exception as e:
             logging.error(f"Model evaluation failed with error: {str(e)}")
+            raise XRayException(e, sys)
+
+    def start_model_pusher(self, model_trainer_artifact: ModelTrainerArtifact,
+                          data_transformation_artifact: DataTransformationArtifact) -> ModelPusherArtifact:
+        """
+        Start the model pusher process for deployment.
+
+        Args:
+            model_trainer_artifact: Artifact from model training
+            data_transformation_artifact: Artifact from data transformation
+
+        Returns:
+            ModelPusherArtifact: Deployment artifact
+        """
+        logging.info("Entered the start_model_pusher method of TrainPipeline class")
+        try:
+            model_pusher = ModelPusher(
+                model_pusher_config=self.model_pusher_config
+            )
+
+            model_pusher_artifact = model_pusher.initiate_model_pusher(
+                model_trainer_artifact=model_trainer_artifact,
+                data_transformation_artifact=data_transformation_artifact
+            )
+
+            logging.info("Exited the start_model_pusher method of TrainPipeline class")
+            return model_pusher_artifact
+
+        except Exception as e:
+            logging.error(f"Model pusher failed with error: {str(e)}")
             raise XRayException(e, sys)

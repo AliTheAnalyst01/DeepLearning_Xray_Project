@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: xray-classifier
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python3 fast_api.py
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHON_VERSION
+        value: 3.12.0

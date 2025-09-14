@@ -31,3 +31,9 @@ class ModelEvaluationArtifact:
 class ModelPusherArtifact:
     bentoml_model_name: str
     bentoml_service_name: str
+    bentoml_model_version: str
+    bentoml_model_path: str
+    bentoml_service_path: str
+    model_accuracy: float
+    model_loss: float
+    deployment_status: str
