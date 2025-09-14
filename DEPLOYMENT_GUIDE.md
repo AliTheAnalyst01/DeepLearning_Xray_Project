@@ -1,6 +1,7 @@
 # 🚀 X-Ray Classification API Deployment Guide
 
 ## 📊 Current Status
+
 - ✅ **Model Trained**: XRayCNN with 96.67% accuracy
 - ✅ **API Ready**: FastAPI with trained model
 - ✅ **Streamlit App**: Ready for deployment
@@ -9,10 +10,13 @@
 ## 🌐 Deployment Options
 
 ### Option 1: Render (Recommended - Free Tier)
+
 **Best for**: Quick deployment, free hosting, easy setup
 
 #### Steps:
+
 1. **Push to GitHub** (if not already done):
+
    ```bash
    git add .
    git commit -m "Add trained model with 96.67% accuracy"
@@ -20,6 +24,7 @@
    ```
 
 2. **Deploy on Render**:
+
    - Go to [render.com](https://render.com)
    - Sign up/Login with GitHub
    - Click "New +" → "Web Service"
@@ -38,18 +43,22 @@
      - Docs: `https://your-app-name.onrender.com/docs`
 
 ### Option 2: Railway (Alternative)
+
 **Best for**: Easy deployment, good free tier
 
 #### Steps:
+
 1. Go to [railway.app](https://railway.app)
 2. Connect GitHub repository
 3. Deploy with default settings
 4. Get your Railway URL
 
 ### Option 3: Fly.io (Advanced)
+
 **Best for**: More control, good performance
 
 #### Steps:
+
 1. Install Fly CLI: `curl -L https://fly.io/install.sh | sh`
 2. Login: `fly auth login`
 3. Deploy: `fly launch` (in project directory)
@@ -60,12 +69,14 @@
 Once you have your deployed API URL, update the Streamlit app:
 
 ### 1. Update API URL in Streamlit App
+
 ```python
 # In streamlit_app.py, change this line:
 API_BASE_URL = "https://your-deployed-url.onrender.com"  # Your actual deployed URL
 ```
 
 ### 2. Test the Deployed API
+
 ```bash
 # Test health endpoint
 curl https://your-deployed-url.onrender.com/health
@@ -80,6 +91,7 @@ curl -X POST "https://your-deployed-url.onrender.com/predict" \
 ## 📱 Complete Deployment Workflow
 
 ### Step 1: Deploy API
+
 1. Choose a platform (Render recommended)
 2. Connect your GitHub repository
 3. Deploy with the settings above
@@ -87,11 +99,13 @@ curl -X POST "https://your-deployed-url.onrender.com/predict" \
 5. Test the deployed API
 
 ### Step 2: Update Streamlit
+
 1. Update `API_BASE_URL` in `streamlit_app.py`
 2. Test locally with deployed API
 3. Deploy Streamlit app (optional)
 
 ### Step 3: Test End-to-End
+
 1. Open Streamlit app
 2. Upload test X-ray images
 3. Verify predictions work with deployed API
@@ -99,6 +113,7 @@ curl -X POST "https://your-deployed-url.onrender.com/predict" \
 ## 🎯 Expected Results
 
 With your 96.67% accuracy model, you should see:
+
 - **High confidence predictions** (80%+ for clear cases)
 - **Accurate classifications** for both normal and pneumonia cases
 - **Fast response times** from the deployed API
@@ -107,12 +122,14 @@ With your 96.67% accuracy model, you should see:
 ## 🔍 Troubleshooting
 
 ### Common Issues:
+
 1. **API not responding**: Check deployment logs
 2. **Model not loading**: Verify model file path in deployment
 3. **CORS errors**: Add CORS middleware to FastAPI
 4. **Memory issues**: Use smaller model or increase deployment resources
 
 ### Debug Commands:
+
 ```bash
 # Check API health
 curl https://your-api-url/health

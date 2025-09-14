@@ -42,11 +42,11 @@ def create_render_config():
             }
         ]
     }
-    
+
     with open('render.yaml', 'w') as f:
         import yaml
         yaml.dump(render_config, f, default_flow_style=False)
-    
+
     print("✅ Created render.yaml configuration")
 
 def update_requirements():
@@ -63,10 +63,10 @@ def update_requirements():
         "matplotlib==3.7.2",
         "seaborn==0.12.2"
     ]
-    
+
     with open('requirements.txt', 'w') as f:
         f.write('\n'.join(requirements))
-    
+
     print("✅ Updated requirements.txt for deployment")
 
 def create_startup_script():
@@ -77,17 +77,17 @@ echo "📊 Model: XRayCNN with 96.67% accuracy"
 echo "🌐 Port: $PORT"
 python3 fast_api.py
 """
-    
+
     with open('start.sh', 'w') as f:
         f.write(startup_script)
-    
+
     os.chmod('start.sh', 0o755)
     print("✅ Created start.sh script")
 
 def main():
     print("🚀 X-Ray API Deployment Preparation")
     print("=" * 50)
-    
+
     # Check git status
     if not check_git_status():
         print("\n💡 Please commit your changes first:")
@@ -95,19 +95,19 @@ def main():
         print("   git commit -m 'Prepare for deployment'")
         print("   git push origin main")
         return
-    
+
     # Create deployment files
     create_render_config()
     update_requirements()
     create_startup_script()
-    
+
     print("\n📋 Deployment Checklist:")
     print("=" * 50)
     print("✅ 1. Code committed to GitHub")
     print("✅ 2. render.yaml created")
     print("✅ 3. requirements.txt updated")
     print("✅ 4. start.sh created")
-    
+
     print("\n🌐 Next Steps:")
     print("=" * 50)
     print("1. Go to https://render.com")
@@ -119,13 +119,13 @@ def main():
     print("   - Start Command: python3 fast_api.py")
     print("   - Environment: Python 3")
     print("6. Deploy and get your URL!")
-    
+
     print("\n🎯 Your API will be available at:")
     print("   https://your-app-name.onrender.com")
     print("   Health: /health")
     print("   Predict: /predict")
     print("   Docs: /docs")
-    
+
     print("\n💡 After deployment, update your Streamlit app:")
     print("   API_BASE_URL = 'https://your-app-name.onrender.com'")
 

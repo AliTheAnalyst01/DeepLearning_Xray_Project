@@ -1,0 +1,9 @@
+bentoml>=1.0.0
+joblib
+numpy>=1.21.0
+pillow>=9.0.0
+pip-chill
+torch>=1.12.0
+torchvision>=0.13.0
+tqdm
+wincertstore
