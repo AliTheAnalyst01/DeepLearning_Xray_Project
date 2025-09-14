@@ -7,8 +7,8 @@ from Xray.pipeline.training_pipeline import TrainPipeline
 def start_training():
     try:
         train_pipeline = TrainPipeline()
-        # Run only data transformation (skip data ingestion)
-        train_pipeline.run_data_transformation_only()
+        # Run the complete training pipeline
+        train_pipeline.run_pipeline()
     except Exception as e:
         raise XRayException(e, sys)
 
