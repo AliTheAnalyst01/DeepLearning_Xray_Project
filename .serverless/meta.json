@@ -1,6 +1,6 @@
 {
   "/home/faizan/Development/DeepLearning_Xray_Project/serverless.yml": {
-    "versionFramework": "4.18.2",
+    "versionFramework": "4.19.1",
     "servicePath": "/home/faizan/Development/DeepLearning_Xray_Project/serverless.yml",
     "serviceConfigFileName": "serverless.yml",
     "service": {
@@ -307,15 +307,17 @@
       "instanceParameters": null
     },
     "error": {
-      "message": "File size (6801031934) is greater than 2 GiB",
-      "stack": "RangeError [ERR_FS_FILE_TOO_LARGE]: File size (6801031934) is greater than 2 GiB\n    at new NodeError (node:internal/errors:405:5)\n    at FSReqCallback.readFileAfterStat [as oncomplete] (node:fs:343:11)",
+      "message": "File size (6972321296) is greater than 2 GiB",
+      "stack": "RangeError [ERR_FS_FILE_TOO_LARGE]: File size (6972321296) is greater than 2 GiB\n    at new NodeError (node:internal/errors:405:5)\n    at FSReqCallback.readFileAfterStat [as oncomplete] (node:fs:343:11)",
       "code": "ERR_FS_FILE_TOO_LARGE"
     },
     "serviceRawFile": "service: xray-classifier-api\n\nprovider:\n  name: aws\n  runtime: python3.12\n  region: us-east-1\n  stage: dev\n  memorySize: 3008  # Maximum for Lambda (3GB)\n  timeout: 30  # Maximum timeout\n  environment:\n    PYTHONPATH: /var/task\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - logs:CreateLogGroup\n        - logs:CreateLogStream\n        - logs:PutLogEvents\n      Resource: \"arn:aws:logs:*:*:*\"\n\nfunctions:\n  api:\n    handler: lambda_handler.handler\n    events:\n      - http:\n          path: /{proxy+}\n          method: ANY\n          cors: true\n      - http:\n          path: /\n          method: ANY\n          cors: true\n\nplugins:\n  - serverless-python-requirements\n\ncustom:\n  pythonRequirements:\n    dockerizePip: false\n    slim: true\n    strip: false\n    noDeps:\n      - boto3\n      - botocore\n",
     "command": [
       "deploy"
     ],
-    "options": {},
+    "options": {
+      "verbose": true
+    },
     "orgId": "5625e71e-162e-42be-a999-2bfbf028e5e7",
     "orgName": "faizandev",
     "userId": "dcnpX5cm2dT3t9Rsct",

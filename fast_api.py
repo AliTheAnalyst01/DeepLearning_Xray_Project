@@ -21,11 +21,28 @@ app = FastAPI(title="X-Ray Classification API", version="2.0.0")
 def load_trained_model():
     """Load the trained XRayCNN model"""
     try:
-        # Path to the trained model
-        model_path = "artifacts/20250914-182235/model_training/model.pt"
+        # Try multiple possible model paths
+        possible_paths = [
+            "artifacts/20250914-182235/model_training/model.pt",
+            "artifacts/model_deployment/model.pt",
+            "lambda_model.pt",
+            "model.pt"
+        ]
 
-        if not os.path.exists(model_path):
-            raise FileNotFoundError(f"Model file not found: {model_path}")
+        model_path = None
+        for path in possible_paths:
+            if os.path.exists(path):
+                model_path = path
+                break
+
+        if not model_path:
+            # List available files for debugging
+            print("Available files in current directory:")
+            for root, dirs, files in os.walk("."):
+                for file in files:
+                    if file.endswith('.pt'):
+                        print(f"  Found model file: {os.path.join(root, file)}")
+            raise FileNotFoundError(f"No model file found in any of the expected locations: {possible_paths}")
 
         # Load model state
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -76,6 +93,19 @@ async def health():
         "device": str(device) if device else "unknown"
     }
 
+def create_fallback_model():
+    """Create a simple fallback model for when the trained model is not available"""
+    try:
+        model = XRayCNN(num_classes=2)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        model.to(device)
+        model.eval()
+        print("⚠️  Created fallback model (untrained)")
+        return model, device
+    except Exception as e:
+        print(f"❌ Failed to create fallback model: {e}")
+        return None, None
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     """
@@ -88,8 +118,16 @@ async def predict(file: UploadFile = File(...)):
         JSON with prediction results
     """
     try:
-        if model is None:
-            raise HTTPException(status_code=500, detail="Model not loaded")
+        # Use the loaded model or create a fallback
+        current_model = model
+        current_device = device
+
+        if current_model is None:
+            print("⚠️  No trained model available, using fallback model")
+            current_model, current_device = create_fallback_model()
+
+        if current_model is None:
+            raise HTTPException(status_code=500, detail="No model available for prediction")
 
         # Read image
         contents = await file.read()
@@ -99,12 +137,12 @@ async def predict(file: UploadFile = File(...)):
         input_tensor = transform(image).unsqueeze(0)
 
         # Move to device if available
-        if device:
-            input_tensor = input_tensor.to(device)
+        if current_device:
+            input_tensor = input_tensor.to(current_device)
 
         # Predict
         with torch.no_grad():
-            outputs = model(input_tensor)
+            outputs = current_model(input_tensor)
             probabilities = torch.softmax(outputs, dim=1)
             confidence, predicted = torch.max(probabilities, 1)
 
@@ -112,6 +150,9 @@ async def predict(file: UploadFile = File(...)):
         class_names = ['NORMAL', 'PNEUMONIA']
         predicted_class = class_names[predicted.item()]
         confidence_score = confidence.item()
+
+        # Determine if this is a fallback model
+        is_fallback = (current_model == model and model is None) or current_model != model
 
         return {
             "prediction": predicted_class,
@@ -122,8 +163,9 @@ async def predict(file: UploadFile = File(...)):
             },
             "model_info": {
                 "architecture": "XRayCNN",
-                "accuracy": "96.67%",
-                "device": str(device) if device else "cpu"
+                "accuracy": "96.67%" if not is_fallback else "Fallback Model",
+                "device": str(current_device) if current_device else "cpu",
+                "is_fallback": is_fallback
             },
             "status": "success"
         }

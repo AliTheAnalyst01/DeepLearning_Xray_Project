@@ -58,8 +58,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # API Configuration
-API_BASE_URL = "https://xray-classifier.onrender.com"  # Update with your deployed URL
-LOCAL_API_URL = "http://localhost:8001"  # For local testing
+API_BASE_URL = "https://xray-classification-api-z5p43sm4ca-uc.a.run.app"  # Google Cloud Run deployed URL
+LOCAL_API_URL = "http://localhost:8000"  # For Docker deployment
+DIRECT_API_URL = "http://localhost:8001"  # For direct local API
 
 def check_api_health(api_url):
     """Check if the API is healthy and running"""
@@ -99,11 +100,16 @@ def main():
     # API URL selection
     api_choice = st.sidebar.radio(
         "Select API Endpoint:",
-        ["🏠 Local API", "🌐 Deployed API (Render)"],
-        help="Choose between local development API or deployed cloud API"
+        ["🏠 Local API (Docker)", "🌐 Deployed API (Google Cloud Run)", "🔧 Local API (Direct)"],
+        help="Choose between local Docker API, deployed cloud API, or direct local API"
     )
 
-    api_url = LOCAL_API_URL if api_choice == "🏠 Local API" else API_BASE_URL
+    if api_choice == "🏠 Local API (Docker)":
+        api_url = LOCAL_API_URL
+    elif api_choice == "🌐 Deployed API (Google Cloud Run)":
+        api_url = API_BASE_URL
+    else:  # "🔧 Local API (Direct)"
+        api_url = DIRECT_API_URL
 
     # Check API health
     with st.sidebar:
